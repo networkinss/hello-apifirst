@@ -10,7 +10,7 @@ java -jar bin/openapi-generator-cli-6.2.1.jar validate -i "./$YAML"
 Write-Host "rm -rf ./$APP/*"
 Write-Host "and start generate..."
 Start-Sleep -s 3
-Remove-Item -Recurse "./$APP/*"
+Remove-Item -Recurse "./$APP/*"  -ErrorAction Ignore
 java -jar bin/openapi-generator-cli-6.2.1.jar generate -i "./$YAML" -g spring -o "./$APP/" $ADD
 if ($LASTEXITCODE -ne 0) {
     Write-Host "Error in: java -jar bin/openapi-generator-cli-6.2.1.jar -i ./$YAML -g spring -o ./output/$APP/ $ADD"
@@ -24,7 +24,7 @@ Push-Location "$APP/"
 Write-Host ""
 mvn clean package
 Write-Host "mv target/$JAR .."
-Move-Item "target/$JAR" ".."
+Move-Item "target/$JAR" ".." -Force
 if ($LASTEXITCODE -ne 0) {
     Write-Host "Error moving to target folder."
     exit 1
@@ -39,7 +39,7 @@ Write-Host "Starting the application with: java -jar -Dserver.port=8080 $JAR"
 Write-Host "After start you can open the application with: http://localhost:8080/"
 Write-Host "and access the swagger-ui with: http://localhost:8080/swagger-ui.html"
 Write-Host "Stop the application with: Ctrl-C"
-java -jar -Dserver.port=8080 $JAR
+java -jar $JAR
 if ($LASTEXITCODE -ne 0) {
     Write-Host "Error starting $JAR."
     exit 1
