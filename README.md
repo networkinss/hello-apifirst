@@ -1,5 +1,6 @@
 # Hello API First
-Hello API First shall give introduction to API First approach.
+Hello API First shall give some hands-on introductions to API First approach, 
+and how to implement it with different languages and frameworks.
 
 ## What is API First?
 API-first refers to the approach of designing and building software RESTful applications
@@ -28,7 +29,7 @@ It is very important for outside developers to be able to use your API to build 
 ## How to use API First?
 API First is a design approach, not a technology.
 It is a way of thinking about how to design and build software applications.
-This repositoy will give you examples of API First approach in different languages and frameworks.
+This repository will give you examples of API First approach in different languages and frameworks.
 
 ## Wording
 Just making sure we are talking about the same things here.
@@ -63,6 +64,7 @@ Automated tests for the API with API First tools.
 Publishing the API to the public.
 ### 6. Reusability
 Reuse the API in other applications.
+### 7. Graphical overview
 ![img.png](img.png)
 
 
