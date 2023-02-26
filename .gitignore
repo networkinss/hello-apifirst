@@ -21,3 +21,12 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+/java/01-generatespringboot/openapi.yaml
+/java/01-generatespringboot/bin/
+/java/01-generatespringboot/petstorespringapifirst/
+
+# IntelliJ
+/.idea/
+*.iml
+*.iws
+*.ipr
