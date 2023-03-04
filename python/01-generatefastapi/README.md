@@ -47,23 +47,11 @@ or use the script
 ```sh
 $ ./generate.sh
 ```
-This script will also generate a virtual environment and install the dependencies.  
-It is not ready to run yet, though.  
-To make it run add thie (optional) code to the top (after the variable 'app'):
-```python
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+This script will also generate a virtual environment and install the dependencies.
 
-@app.get("/")
-async def root():
-    return {"appstatus": "up"}
-```
-It just ensures that the app answers to the root path: '/'.  
+### Adjustments
+It is not ready to run yet, though. A few adjustments are needed.  
+
 **To make it run**, you need to add following code to the bottom of the main.py file:
 ```python 
 if __name__ == "__main__":
@@ -84,11 +72,28 @@ import pathlib
 import uvicorn
 ```
 
+Add this (optional) code to the top (after the variable 'app'):
+```python
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/")
+async def root():
+    return {"appstatus": "up"}
+```
+It just ensures that the app answers to the root path: '/'.  
+
+
 In the upload_file method you need to change the order of the parameter (otherwise you get an error):  
   file: UploadFile,
 I needed also to remote a dot in front of the model import:
 ```python
-  from .models import File
+  from models import File
 ```
 
 Now you can start the server in the app folder with:
