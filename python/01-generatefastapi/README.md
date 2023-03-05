@@ -1,10 +1,9 @@
 # fastapi-code-generator
 
-This code generator creates a FastAPI app from an openapi file.
+This code generator creates a FastAPI app from an openapi file.  
+The generate is from [fastapi-code-generator Git repository](https://github.com/koxudaxi/fastapi-code-generator).
 
-[fastapi-code-generator Git repository](https://github.com/koxudaxi/fastapi-code-generator)
-
-## This project is in experimental phase.
+## The project is in experimental phase.
 
 fastapi-code-generator uses [datamodel-code-generator](https://github.com/koxudaxi/datamodel-code-generator) to generate pydantic models
 
@@ -95,6 +94,11 @@ I needed also to remote a dot in front of the model import:
 ```python
   from models import File
 ```
+## Conclusion
+All in all it means that the generated code needs some modifications to work properly.  
+However, it gives a very good head start which contains already all API endpoints and models that are defined in the openapi.yaml file.
+
+## Start the server
 
 Now you can start the server in the app folder with:
 ```sh
