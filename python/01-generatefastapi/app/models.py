@@ -94,5 +94,3 @@ class Status3(Enum):
     sold = 'sold'
 
 
-class StoreInventoryGetResponse(BaseModel):
-    __root__: Optional[Dict[str, int]] = None

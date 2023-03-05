@@ -1,7 +1,13 @@
 # fastapi-code-generator
 
 This code generator creates a FastAPI app from an openapi file.  
-The generate is from [fastapi-code-generator Git repository](https://github.com/koxudaxi/fastapi-code-generator).
+The generator is used from [fastapi-code-generator Git repository](https://github.com/koxudaxi/fastapi-code-generator).
+The description here is partly from that repository.  
+I added some more information to make it easier to get started with the generated code.  
+After all, the generated code is not ready to run and needs some adjustments.  
+However, I think it is useful to have a starting point for a FastAPI app.
+
+There is a Postman collection in the ./resources folder to check the API endpoints.
 
 ## The project is in experimental phase.
 
@@ -90,13 +96,10 @@ It just ensures that the app answers to the root path: '/'.
 
 In the upload_file method you need to change the order of the parameter (otherwise you get an error):  
   file: UploadFile,
-I needed also to remote a dot in front of the model import:
+I needed also to remove a dot in front of the model import:
 ```python
   from models import File
 ```
-## Conclusion
-All in all it means that the generated code needs some modifications to work properly.  
-However, it gives a very good head start which contains already all API endpoints and models that are defined in the openapi.yaml file.
 
 ## Start the server
 
@@ -105,7 +108,9 @@ Now you can start the server in the app folder with:
 $ python3 main.py
 ``` 
 The file log.ini is not mandatory, but it is nice to have.  
-If not used, you should also remove 'log_config=f"{cwd}/log.ini"' frm the start command in main.py.
+If not used, you should also remove 'log_config=f"{cwd}/log.ini"' frm the start command in main.py.  
+
+You can access the OpenAPI documentation at http://localhost:8000/docs.
 
 ## Custom Template
 If you want to generate custom `*.py` files then you can give a custom template directory to fastapi-code-generator with `-t` or `--template-dir` options of the command.

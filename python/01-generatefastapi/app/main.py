@@ -9,7 +9,7 @@ from starlette.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, Header, Path, Query, UploadFile
 import uvicorn
 import pathlib
-from models import ApiResponse, Order, Pet, Status3, StoreInventoryGetResponse, User
+from models import ApiResponse, Order, Pet, Status3, User
 
 app = FastAPI(
     title='Swagger Petstore - OpenAPI 3.0',
@@ -24,6 +24,7 @@ app = FastAPI(
     servers=[{'url': '/api/v3'}],
 )
 
+#Manually added code for CORS.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -41,7 +42,8 @@ def update_pet(body: Pet) -> Pet:
     """
     Update an existing pet
     """
-    pass
+    # Manually replaced 'pass' with the following code.
+    return Pet(name='test', photoUrls=[])
 
 
 @app.post('/pet', response_model=Pet, tags=['pet'])
@@ -49,7 +51,8 @@ def add_pet(body: Pet) -> Pet:
     """
     Add a new pet to the store
     """
-    pass
+    # Manually replaced 'pass' with the following code.
+    return Pet(name='test', photoUrls=[])
 
 
 @app.get('/pet/findbystatus', response_model=List[Pet], tags=['pet'])
@@ -57,7 +60,8 @@ def find_pets_by_status(status: Optional[Status3] = 'available') -> List[Pet]:
     """
     Finds Pets by status
     """
-    pass
+    # Manually replaced 'pass' with the following code.
+    return []
 
 
 @app.get('/pet/findbytags', response_model=List[Pet], tags=['pet'])
@@ -65,20 +69,22 @@ def find_pets_by_tags(tags: Optional[List[str]] = None) -> List[Pet]:
     """
     Finds Pets by tags
     """
-    pass
+    # Manually replaced 'pass' with the following code.
+    return []
 
 
 @app.get('/pet/{pet_id}', response_model=Pet, tags=['pet'])
-def get_pet_by_id(pet_id: int = Path(..., alias='petId')) -> Pet:
+def get_pet_by_id(pet_id: int) -> Pet: # manually removded alias='petId'
     """
     Find pet by ID
     """
-    pass
+    # Manually replaced 'pass' with the following code.
+    return Pet(name='test', photoUrls=[])
 
 
 @app.post('/pet/{pet_id}', response_model=None, tags=['pet'])
 def update_pet_with_form(
-    pet_id: int = Path(..., alias='petId'),
+    pet_id: int,  # Manually removed this code: = Path(..., alias='petId'),
     name: Optional[str] = None,
     status: Optional[str] = None,
 ) -> None:
@@ -90,8 +96,9 @@ def update_pet_with_form(
 
 @app.delete('/pet/{pet_id}', response_model=None, tags=['pet'])
 def delete_pet(
+    pet_id: int, # Manually removed this code: = Path(..., alias='petId'),
     a_p_i__k_e_y: Optional[str] = Header(None, alias='API_KEY'),
-    pet_id: int = Path(..., alias='petId'),
+
 ) -> None:
     """
     Deletes a pet
@@ -102,22 +109,15 @@ def delete_pet(
 @app.post('/pet/{pet_id}/uploadimage', response_model=ApiResponse, tags=['pet'])
 def upload_file(
     file: UploadFile,
-    pet_id: int = Path(..., alias='petId'),
-    additional_metadata: Optional[str] = Query(None, alias='additionalMetadata'),
+    pet_id: int,  # Manually removed this code: = Path(..., alias='petId'),
+    additional_metadata: str = 'test',   # Manually removed this code: = Query(None, alias='additionalMetadata'),
 
 ) -> ApiResponse:
     """
     uploads an image
     """
-    pass
-
-
-@app.get('/store/inventory', response_model=StoreInventoryGetResponse, tags=['store'])
-def get_inventory() -> StoreInventoryGetResponse:
-    """
-    Returns pet inventories by status
-    """
-    pass
+    # Manually replaced 'pass' with the following code.
+    return ApiResponse(code=200, type='string', message='string')
 
 
 @app.post('/store/order', response_model=Order, tags=['store'])
@@ -125,19 +125,21 @@ def place_order(body: Order = None) -> Order:
     """
     Place an order for a pet
     """
-    pass
+    # Manually replaced 'pass' with the following code.
+    return Order(id=1, petId=1, quantity=1, shipDate='2021-01-01T00:00:00.000Z', status='placed', complete=True)
 
 
 @app.get('/store/order/{order_id}', response_model=Order, tags=['store'])
-def get_order_by_id(order_id: int = Path(..., alias='orderId')) -> Order:
+def get_order_by_id(order_id: int ) -> Order:
     """
     Find purchase order by ID
     """
-    pass
+    # Manually replaced 'pass' with the following code.
+    return Order(id=1, petId=1, quantity=1, shipDate='2021-01-01T00:00:00.000Z', status='placed', complete=True)
 
 
 @app.delete('/store/order/{order_id}', response_model=None, tags=['store'])
-def delete_order(order_id: int = Path(..., alias='orderId')) -> None:
+def delete_order(order_id: int) -> None:
     """
     Delete purchase order by ID
     """
@@ -159,7 +161,7 @@ def create_users_with_list_input(body: List[User] = None) -> User:
     """
     Creates list of users with given input array
     """
-    pass
+    return User(id=1, username='test', firstName='test', lastName='test')
 
 
 @app.get('/user/login', response_model=str, tags=['user'])
@@ -167,7 +169,7 @@ def login_user(username: Optional[str] = None, password: Optional[str] = None) -
     """
     Logs user into the system
     """
-    pass
+    return 'string'
 
 
 @app.get('/user/logout', response_model=None, tags=['user'])
@@ -183,7 +185,7 @@ def get_user_by_name(username: str) -> User:
     """
     Get user by user name
     """
-    pass
+    return User(id=1, username='test', firstName='test', lastName='test', email='test@example.com', password='test', phone='test', userStatus=1)
 
 
 @app.put('/user/{username}', response_model=None, tags=['user'])
@@ -201,6 +203,7 @@ def delete_user(username: str) -> None:
     """
     pass
 
+# Manually added code to start the server
 if __name__ == "__main__":
     cwd = pathlib.Path(__file__).parent.resolve()
     print("cwd: " + str(cwd))
